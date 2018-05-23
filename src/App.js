@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Grid, Jumbotron } from 'react-bootstrap'
 
 import Navigation from './containers/NavigationContainer'
 
-import './App.css'
-
 const App = props => (  
-  <div className="App">
+  <Grid>
     <Navigation />
+    <Jumbotron>
     { React.Children.toArray(props.children) }
-  </div>
+    </Jumbotron>
+  </Grid>
 )
 
 App.propTypes = {  

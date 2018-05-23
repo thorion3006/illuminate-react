@@ -6,6 +6,8 @@ import createSagaMiddleware from 'redux-saga'
 import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router-dom'
 import { ConnectedRouter, routerMiddleware as router } from 'react-router-redux'
+import Redirect from 'react-router-dom/Redirect';
+import Switch from 'react-router-dom/Switch';
 
 // Import the index reducer and sagas
 import IndexReducer from './utils/index-reducer'  
@@ -13,17 +15,16 @@ import IndexSagas from './utils/index-sagas'
 
 // Import all of our components
 import App from './App'
-import Dashboard from './containers/DashboardContainer' 
+import {ProtectedRoute} from './containers/ProtectedRouteContainer'
+import Dashboard from './components/dashboard' 
 import Login from './containers/LoginContainer'  
 import Signup from './containers/SignupContainer'
-import NoMatch from './containers/NoMatchContainer'
+import NoMatch from './components/noMatch'
 
 // Other Imports
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
-import Redirect from 'react-router-dom/Redirect';
-import Switch from 'react-router-dom/Switch';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
@@ -55,7 +56,7 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Redirect from = "/" exact to = "/dashboard" />
-                    <Route path = "/dashboard" component = {Dashboard} />
+                    <ProtectedRoute path = "/dashboard" component = {Dashboard} />
                     <Route path = "/login" component = {Login} />
                     <Route path = "/signup" component = {Signup} />
                     <Route component = {NoMatch} />
